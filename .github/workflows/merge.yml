@@ -1,0 +1,26 @@
+name: Merge Videos
+
+on:
+  push:
+    paths:
+      - 'videos/**'
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install moviepy
+      run: pip install moviepy
+
+    - name: Merge videos
+      run: |
+        python merge_videos.py videos/output.mp4 videos/video1.mp4 videos/video2.mp4
